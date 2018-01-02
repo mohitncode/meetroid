@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="./css/materialize.min.css">
+</head>
+<body>
+  <div class="container">
+    <br/>
+    <h4 class="center">Admin Dashboard</h4>
+    <br />
+    <div class="row center">
+      <table id="user-status" class="bordered highlight responsive-table">
+        <thead>
+          <tr>
+            <th data-field="id">User ID</th>
+            <th data-field="name">Username</th>
+            <th data-field="price">Login Time</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div class="row center">
+      <div class="col s4 offset-s4">
+        <a class="btn waves-effect waves-light red" name="logout" href="./logout">Logout</a>
+      </div>
+    </div>
+  <script type="text/javascript" src="./js/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/materialize.min.js"></script>
+  <script type="text/javascript" src="./socket.io/socket.io.js"></script>
+  <script type="text/javascript">
+    'use strict';
+    var socket = io();
+    socket.on('connect', function () {
+      console.info('Socket is in connected state!');
+    });
+
+    socket.on('update-user-status', function (data) {
+      var ce = document.createElement.bind(document);
+
+      var oldTbody = document.querySelector('#user-status').getElementsByTagName('tbody')[0],
+          newTbody = ce('tbody');
+
+      for (var i in data) {
+        var row = ce('tr'),
+            userId = ce('td'),
+            username = ce('td'),
+            status = ce('td');
+
+        userId.innerText = data[i].id;
+        username.innerText = i;
+        status.innerText = data[i].loginTime;
+
+        row.appendChild(userId);
+        row.appendChild(username);
+        row.appendChild(status);
+
+        newTbody.appendChild(row);
+      }
+
+      oldTbody.parentNode.replaceChild(newTbody, oldTbody);
+    });
+  </script>
+</body>
+</html>

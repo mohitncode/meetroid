@@ -1,0 +1,27 @@
+{
+  "name": "meetroid",
+  "version": "1.0.0",
+  "description": "Organize meetings on steroids (disclaimer: not literally!).",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test -t 10000"
+  },
+  "keywords": [
+    "meeting",
+    "server",
+    "api",
+    "rest"
+  ],
+  "author": "Mohit Delhiwala",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "socket.io": "^1.4.5"
+  }
+}
